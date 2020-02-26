@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UFT-8">
+  <title> </title>
+</head>
+<body>
+
+  <h1 >Botão bolado</h1>
+  <div id = "container"></div>
+  <button id="botao">Caixa vermelha</button>
+  <div class="box"></div>
+    <script>
+//Crie um botão que ao ser clicado cria um novo elemento em tela com a forma de um quadrado
+//vermelho com 100px de altura e largura. Sempre que o botão for clicado um novo quadrado deve
+//aparecer na tela.
+      var bt = document.getElementById("botao")
+
+      bt.addEventListener("click", function (){
+        //var box = document.querySelector('.box')//referência a um elemento para conter um novo elemento
+        var box = document.createElement("div")
+        box.style.width = '100px'
+        box.style.height = '100px'
+        box.style.backgroundColor = '#f00'
+        box.style.display = "inline-block"
+        
+       var container = document.getElementById("container")
+       container.appendChild(box)//inserção dentro do elemento que já está no página
+      })
+
+    </script>
+</body>
+</html>

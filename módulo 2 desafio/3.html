@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UFT-8">
+  <title> </title>
+</head>
+<body>
+    <div class="exibir">
+        <ul id="lista">
+        </ul>
+    </div>
+    <script>
+
+//A partir do seguinte vetor:
+//var nomes = ["Diego", "Gabriel", "Lucas"];
+//Preencha uma lista ( <ul> ) no HTML com os itens da seguinte forma:
+// .Diego
+// .Gabriel
+// .Lucas
+var nomes = ["Diego", "Gabriel", "Lucas"];
+
+var coleta = document.getElementById("lista")
+
+//criar elemento para cada campo
+const elemDie = document.createElement('li')
+const elemGab = document.createElement('li')
+const elemLuc = document.createElement('li')
+
+elemDie.innerHTML = nomes[0]
+elemGab.innerHTML = nomes[1]
+elemLuc.innerHTML = nomes[2]
+
+    
+        //adicionar cada elemento na lista
+lista.appendChild(elemDie)
+lista.appendChild(elemGab)
+lista.appendChild(elemLuc)
+    
+
+    </script>
+</body>
+</html>
