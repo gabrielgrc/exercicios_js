@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <input type="text" id="nome" value="insira o nome" onfocus="this.value='';"/>
+    <input type="text" id="nome">
     <button onClick="adicionar()">Adicionar</button>
 
     <div class="exibir">
@@ -21,37 +21,29 @@
 //Ao clicar no botão, a função adicionar() deve ser disparada adicionando um novo item a lista denomes baseado no nome preenchido no input e renderizando o novo item em tela juntos aos
 //demais itens anteriores. Além disso, o conteúdo do input deve ser apagado após o clique.
 
-var nomes = ["Diego", "Gabriel", "Lucas"];
+var nomes = [];
 
 //pegar nome digitado
 //var nomeDig = document.getElementById("nome")
 
 //criar elemento para cada campo
-const elemDie = document.createElement('li')
-const elemGab = document.createElement('li')
-const elemLuc = document.createElement('li')
+//const elemDie = document.createElement('li')
+//const elemGab = document.createElement('li')
+//const elemLuc = document.createElement('li')
 
 //cada elemento recebe o seu conteúdo referente ao vetor nomes
-elemDie.innerHTML = nomes[0]
-elemGab.innerHTML = nomes[1]
-elemLuc.innerHTML = nomes[2]
+//elemDie.innerHTML = nomes[0]
+//elemGab.innerHTML = nomes[1]
+//lemLuc.innerHTML = nomes[2]
 
     
         //adicionar cada elemento na lista
-lista.appendChild(elemDie)
-lista.appendChild(elemGab)
-lista.appendChild(elemLuc)
+//lista.appendChild(elemDie)
+//lista.appendChild(elemGab)
+//lista.appendChild(elemLuc)
 
 //função para adicionar mais um nome à lista
         function adicionar(){
-            //Lógica que vinha sendo tentada
-            //var coleta = document.getElementById("nome")
-            //nomes.push(nome.value)//inserindo o elemento digitado dentro do array nomes
-            //console.log(nomes)
-            //var nomeDig = document.createElement('li')
-            //lista.appendChild(nomeDig.innerHTML)
-            /////////////////////////////////////////////////////////
-            //Abaixo, a lógica que funcionou com correções da lógica acima
             var coleta = document.getElementById("nome")
             nomes.push(nome.value)//inserindo o elemento digitado dentro do array nomes
             var nomeDig = document.createElement('li')
@@ -61,5 +53,5 @@ lista.appendChild(elemLuc)
             console.log(nomes)
     }
     </script>
-</body>
+</body> 
 </html>
