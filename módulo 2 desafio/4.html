@@ -1,65 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UFT-8">
-  <title> </title>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UFT-8">
+    <title> </title>
+    </head>
+    <body>
 
-    <input type="text" id="nome" value="insira o nome" onfocus="this.value='';"/>
-    <button onClick="adicionar()">Adicionar</button>
+        <input type="text" id="nome" value="insira o nome" onfocus="this.value='';"/>
+        <button onClick="adicionar()">Adicionar</button>
 
-    <div class="exibir">
-        <ul id="lista">
-        </ul>
-    </div>
-    <script>
-//Seguindo o resultado do exercício anterior adicione um input em tela e um botão como a seguir:
-//<input type="text" name="nome">
-//<button onClick="adicionar()">Adicionar</button>
+        <div class="exibir">
+            <ul id="lista">
+            </ul>
+        </div>
+        <script>
+    //Seguindo o resultado do exercício anterior adicione um input em tela e um botão como a seguir:
+    //<input type="text" name="nome">
+    //<button onClick="adicionar()">Adicionar</button>
 
-//Ao clicar no botão, a função adicionar() deve ser disparada adicionando um novo item a lista denomes baseado no nome preenchido no input e renderizando o novo item em tela juntos aos
-//demais itens anteriores. Além disso, o conteúdo do input deve ser apagado após o clique.
+    //Ao clicar no botão, a função adicionar() deve ser disparada adicionando um novo item a lista denomes baseado no nome preenchido no input e renderizando o novo item em tela juntos aos
+    //demais itens anteriores. Além disso, o conteúdo do input deve ser apagado após o clique.
 
-var nomes = ["Diego", "Gabriel", "Lucas"];
+    var nomes = ["Diego", "Gabriel", "Lucas"];
 
-//pegar nome digitado
-//var nomeDig = document.getElementById("nome")
-
-//criar elemento para cada campo
-const elemDie = document.createElement('li')
-const elemGab = document.createElement('li')
-const elemLuc = document.createElement('li')
-
-//cada elemento recebe o seu conteúdo referente ao vetor nomes
-elemDie.innerHTML = nomes[0]
-elemGab.innerHTML = nomes[1]
-elemLuc.innerHTML = nomes[2]
-
-    
-        //adicionar cada elemento na lista
-lista.appendChild(elemDie)
-lista.appendChild(elemGab)
-lista.appendChild(elemLuc)
-
-//função para adicionar mais um nome à lista
-        function adicionar(){
-            //Lógica que vinha sendo tentada
-            //var coleta = document.getElementById("nome")
-            //nomes.push(nome.value)//inserindo o elemento digitado dentro do array nomes
-            //console.log(nomes)
-            //var nomeDig = document.createElement('li')
-            //lista.appendChild(nomeDig.innerHTML)
-            /////////////////////////////////////////////////////////
-            //Abaixo, a lógica que funcionou com correções da lógica acima
-            var coleta = document.getElementById("nome")
-            nomes.push(nome.value)//inserindo o elemento digitado dentro do array nomes
-            var nomeDig = document.createElement('li')
-            nomeDig.innerHTML = nomes
-            //console.log(nomeDig)
-            lista.appendChild(nomeDig)
-            console.log(nomes)
+    for (var i = 0; i<nomes.length; i++){//ciclo for para percorrer todo o vetor nomes
+        var lis =  document.createElement('li')
+        lis.innerHTML = nomes[i]
+        lista.appendChild(lis)
     }
-    </script>
-</body>
-</html>
+
+    //função para adicionar mais um nome à lista
+            function adicionar(){
+                var coleta = document.getElementById("nome").value
+                var nomeDig = document.createElement('li')
+                nomes.push(coleta)
+                console.log(nomes)//avaliar o comportamento do vetor
+                nomeDig.innerHTML = coleta
+                lista.appendChild(nomeDig)
+        }
+        </script>
+    </body>
+    </html>
