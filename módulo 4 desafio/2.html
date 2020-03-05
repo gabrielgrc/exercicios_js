@@ -6,13 +6,25 @@
 </head>
 <body>
 
-  <form id="form-usuario" onsubmit="searchUsuario()" method="POST">
-    <input type="text" name="user" id="usuario" placeholder="Informe o usuario do github">
-    <button type="submit">Adicionar</button>
-  </form>
+    <form id="form-usuario" onsubmit="searchUsuario()" method="POST">
+        <input type="text" name="user" id="usuario" placeholder="Informe o usuario do github">
+        <button type="submit">Buscar usuário</button>
+      </form>
+
+      <div>
+    <ul id = lista>
+        
+    </ul>
+      </div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
+    //Crie uma tela com um <input> que deve receber o nome de um usuário no Github. Após digitar o
+    //nome do usuário e clicar no botão buscar a aplicação deve buscar pela API do Github (conforme
+    //URL abaixo) os dados de repositórios do usuário e mostrá-los em tela:
+    //URL de exemplo: https://api.github.com/users/diego3g/repos
+    //Depois de preencher o input e adicionar, a seguinte lista deve aparecer abaixo:(presente logo acima, abaixo do form)
+
     //função para procurar o usuário
     function searchUsuario() {
       alert("searching...")
@@ -21,8 +33,19 @@
       let coleta = document.getElementById("usuario").value
 
       axios.get(`https://api.github.com/users/${coleta}/repos`)
-        .then(function(response) {
+        .then(function(response) {//caso o usuário seja encontrado...
           console.log(response)
+          
+          var nomes = []//vetor que armazenará os repositórios
+          nomes.push(`https://api.github.com/users/${coleta}/repos`)//adiciona o usuário obtido na busca/pesquisa do usuário
+         
+          for (var i = 0; i<nomes.length; i++){
+              var lis = document.createElement('li')
+              lis.innerHTML = nomes[i]
+              lista.appendChild(lis)
+          }
+          console.log(nomes)
+
         })
         .catch(function(error) {
           console.log(error)
