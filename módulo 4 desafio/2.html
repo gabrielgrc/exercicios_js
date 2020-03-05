@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UFT-8">
+  <title> </title>
+</head>
+<body>
+
+  <form id="form-usuario" onsubmit="searchUsuario()" method="POST">
+    <input type="text" name="user" id="usuario" placeholder="Informe o usuario do github">
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    //função para procurar o usuário
+    function searchUsuario() {
+      alert("searching...")
+      event.preventDefault()
+
+      let coleta = document.getElementById("usuario").value
+
+      axios.get(`https://api.github.com/users/${coleta}/repos`)
+        .then(function(response) {
+          console.log(response)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    }
+  </script>
+</body>
+</html>
