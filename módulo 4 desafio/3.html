@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UFT-8">
+  <title> </title>
+</head>
+<body>
+
+    <form id="form-usuario" onsubmit="searchUsuario()" method="POST">
+        <input type="text" name="user" id="usuario" placeholder="Informe o usuario do github">
+        <button type="submit">Buscar usuário</button>
+      </form>
+
+      <div>
+    <ul id = lista>
+        
+    </ul>
+      </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+
+//A partir do resultado do exemplo anterior adicione um indicador de carregamento em tela no lugar da lista apenas enquanto a requisição estiver acontecendo:
+//<li>Carregando...</li>
+//Além disso, adicione uma mensagem de erro em tela caso o usuário no Github não exista.
+//Dica: Quando o usuário não existe, a requisição irá cair no .catch com código de erro 404.
+
+
+    //função para procurar o usuário
+    function searchUsuario() {
+      
+      //alert("searching...")
+      event.preventDefault()
+
+      var a = '<li Carregando...</li>'
+      
+
+      console.log(a)
+
+      let coleta = document.getElementById("usuario").value
+
+      axios.get(`https://api.github.com/users/${coleta}/repos`)
+        .then(function(response) {//caso o usuário seja encontrado...
+          console.log(response)
+          
+          var nomes = []//vetor que armazenará os repositórios
+          nomes.push(`https://api.github.com/users/${coleta}/repos`)//adiciona o usuário obtido na busca/pesquisa do usuário
+         
+          for (var i = 0; i<nomes.length; i++){
+              var lis = document.createElement('li')
+              lis.innerHTML = nomes[i]
+              lista.appendChild(lis)
+          }//ponto no qual o indicador de loading deve sumir
+          console.log(nomes)
+
+        })
+        .catch(function(error) {
+          console.log(error)
+          console.log("Este usuário do github não existe")
+        })
+    }
+  </script>
+</body>
+</html>
