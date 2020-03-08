@@ -6,57 +6,60 @@
 </head>
 <body>
 
-    <form id="form-usuario" onsubmit="searchUsuario()" method="POST">
+    <form id="form-usuario" onsubmit="searchUsuario(event)" method="POST">
         <input type="text" name="user" id="usuario" placeholder="Informe o usuario do github">
         <button type="submit">Buscar usuário</button>
       </form>
 
       <div>
     <ul id = lista>
-        
+
     </ul>
       </div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
 
-//A partir do resultado do exemplo anterior adicione um indicador de carregamento em tela no lugar da lista apenas enquanto a requisição estiver acontecendo:
-//<li>Carregando...</li>
-//Além disso, adicione uma mensagem de erro em tela caso o usuário no Github não exista.
-//Dica: Quando o usuário não existe, a requisição irá cair no .catch com código de erro 404.
-
-
     //função para procurar o usuário
-    function searchUsuario() {
-      
-      //alert("searching...")
+    function searchUsuario(event) {
+
+      console.log("vem neném !")
       event.preventDefault()
 
-      var a = '<li Carregando...</li>'
-      
+      var carregando = document.getElementById("carregando")//procura a li com a mensagem procurando
 
-      console.log(a)
+      if (carregando && carregando.length){//caso exista, remove
+        carregando.outerHTML = ''
+      }
+
+      var lista = document.getElementById("lista")//atribuir a uma var a lista
+      var lista_html = lista.innerHTML//armazenamento do conteúdo da lista nesta variável
+      lista.innerHTML = '<li id="carregando">Carregando...</li>'//insere mensagem na lista
 
       let coleta = document.getElementById("usuario").value
+
+      document.getElementById("lista").innerHTML = '<li>Carregando...</li>'//ícone de carregando sendo inseridog
 
       axios.get(`https://api.github.com/users/${coleta}/repos`)
         .then(function(response) {//caso o usuário seja encontrado...
           console.log(response)
-          
+          lista.innerHTML = lista_html//reinserção do html na var lista_html
+
           var nomes = []//vetor que armazenará os repositórios
           nomes.push(`https://api.github.com/users/${coleta}/repos`)//adiciona o usuário obtido na busca/pesquisa do usuário
-         
+
+          document.getElementById("lista").innerHTML = ''//lista sendo esvaziada a cada ciclo for
           for (var i = 0; i<nomes.length; i++){
               var lis = document.createElement('li')
               lis.innerHTML = nomes[i]
               lista.appendChild(lis)
-          }//ponto no qual o indicador de loading deve sumir
+          }
           console.log(nomes)
-
         })
         .catch(function(error) {
+          document.getElementById("lista").outerHTML = ""
           console.log(error)
-          console.log("Este usuário do github não existe")
+          alert("Este usuário do github não existe")
         })
     }
   </script>

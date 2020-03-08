@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title> </title>
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    #lista-zona{
+      height: 200px;
+      width: 300px;
+      overflow-y: scroll;
+      position: relative;
+    }
+    #lista{
+      height: 100%;
+      width: 100%;
+    }
+    #icone-carregando {
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      background-color: white;
+    }
+    .carregado {
+      display: none;
+    }
+    .carregando {
+      display: flex;
+    }
+  </style>
+</head>
+<body>
+  <form id="form-usuario" onsubmit="searchUsuario()" method="POST">
+    <input type="text" name="user" id="usuario" placeholder="Informe o usuario do github">
+    <button type="submit">Buscar usuário</button>
+  </form>      
+  <div id="lista-zona">
+    <span id="icone-carregando" class="carregado">Carregando...</span>
+    <ul id="lista">
+    </ul>
+  </div> 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>//A partir do resultado do exemplo anterior adicione um indicador de carregamento em tela no lugar da lista apenas enquanto a requisição estiver acontecendo:
+//<li>Carregando...</li>
+//Além disso, adicione uma mensagem de erro em tela caso o usuário no Github não exista.
+//Dica: Quando o usuário não existe, a requisição irá cair no .catch com código de erro 404.    //função para procurar o usuário
+    function searchUsuario() {
+      //alert("searching...")
+      event.preventDefault();
+      let lista = document.getElementById('lista');
+      let iconeCarregando = document.getElementById('icone-carregando');
+      let coleta = document.getElementById("usuario").value;
+      iconeCarregando.className = 'carregando';
+      axios.get(`https://api.github.com/users/${coleta}/repos`).then(function(response) {//caso o usuário seja encontrado...
+          console.log(response)
+          var nomes = []//vetor que armazenará os repositórios
+          nomes.push(`https://api.github.com/users/${coleta}/repos`)//adiciona o usuário obtido na busca/pesquisa do usuário
+          for (var i = 0; i<nomes.length; i++){
+              var lis = document.createElement('li')
+              lis.innerHTML = nomes[i]
+              lista.appendChild(lis)
+          }
+          iconeCarregando.className = 'carregado';
+          //ponto no qual o indicador de loading deve sumir
+          console.log(nomes)        })
+        .catch(function(error) {
+          console.log(error)
+          console.log("Este usuário do github não existe")
+        })
+    }
+  </script>
+</body>
+</html>
